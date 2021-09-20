@@ -38,6 +38,13 @@ uint64_t thread_main(uint64_t core_id, uint32_t num_cores, uint32_t iterations) 
   for (int i = 0; i < iterations; i++) {
     MATRIX[i*num_cores + core_id] = 1;
     sum += MATRIX[i*num_cores + core_id];
+    if (sum != i+1) {
+      // synchronize at end of computation by incrementing the end barrier
+      lock(&global_lock);
+      end_barrier_mem += 1;
+      unlock(&global_lock);
+      return sum;
+    }
   }
 
   // synchronize at end of computation by incrementing the end barrier
