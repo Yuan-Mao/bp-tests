@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef MC_UTIL_H
+#define MC_UTIL_H
+
 // Random Number Generator
 // Source: stackoverflow.com/questions/7602919/how-do-i-generate-random-numbers-without-rand-function
 uint16_t mc_rand() {
@@ -53,3 +56,4 @@ void unlock(volatile uint64_t *addr) {
                                                  :);
 }
 
+#endif
